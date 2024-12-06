@@ -17,6 +17,14 @@ pipeline {
                 sh 'mvn clean install' // Nettoyer et construire le projet
             }
         }
+        
+         stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build ("my-docker-iamge:${BUILD_ID}")
+                }
+            }
+        }
 
         stage('Run Tests') {
             steps {
